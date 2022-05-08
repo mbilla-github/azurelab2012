@@ -7,45 +7,9 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "LabDataFactory2022"
 		},
-		"SrcAzureDataLakeStorage_accountKey": {
+		"AzureBlobStorageLinkSrvc_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'SrcAzureDataLakeStorage'"
-		},
-		"AzureSqlDatabaseLS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseLS'"
-		},
-		"SrcAzureBlobStorage_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SrcAzureBlobStorage'"
-		},
-		"SrcAzureDataLakeStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://appdatalake4synapse.dfs.core.windows.net"
-		},
-		"EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().fileName"
-		},
-		"EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFilePath": {
-			"type": "string",
-			"defaultValue": "@triggerBody().folderPath"
-		},
-		"EventTriggerSalesDaily-hourly_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/bad72352-6845-474e-8e98-e44d28654ecc/resourceGroups/dev-resgroup/providers/Microsoft.Storage/storageAccounts/appdatalake4synapse"
-		},
-		"TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody().fileName"
-		},
-		"TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFilePath": {
-			"type": "string",
-			"defaultValue": "@triggerBody().folderPath"
-		},
-		"TRigger_EVT_Hub_CopyData_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/bad72352-6845-474e-8e98-e44d28654ecc/resourceGroups/dev-resgroup/providers/Microsoft.Storage/storageAccounts/appdatalake4synapse"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageLinkSrvc'"
 		},
 		"containerUri": {
 			"type": "string",
@@ -74,79 +38,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"SrcAzureDataLakeStorage_accountKey": {
-						"value": "[parameters('SrcAzureDataLakeStorage_accountKey')]"
-					},
-					"AzureSqlDatabaseLS_connectionString": {
-						"value": "[parameters('AzureSqlDatabaseLS_connectionString')]"
-					},
-					"SrcAzureBlobStorage_connectionString": {
-						"value": "[parameters('SrcAzureBlobStorage_connectionString')]"
-					},
-					"SrcAzureDataLakeStorage_properties_typeProperties_url": {
-						"value": "[parameters('SrcAzureDataLakeStorage_properties_typeProperties_url')]"
+					"AzureBlobStorageLinkSrvc_connectionString": {
+						"value": "[parameters('AzureBlobStorageLinkSrvc_connectionString')]"
 					}
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "LabDataFactory2022_ArmTemplate_1",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'LabDataFactory2022_ArmTemplate_0')]"
-			]
-		},
-		{
-			"name": "LabDataFactory2022_ArmTemplate_2",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					},
-					"EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFileName": {
-						"value": "[parameters('EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFileName')]"
-					},
-					"EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFilePath": {
-						"value": "[parameters('EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFilePath')]"
-					},
-					"EventTriggerSalesDaily-hourly_properties_typeProperties_scope": {
-						"value": "[parameters('EventTriggerSalesDaily-hourly_properties_typeProperties_scope')]"
-					},
-					"TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFileName": {
-						"value": "[parameters('TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFileName')]"
-					},
-					"TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFilePath": {
-						"value": "[parameters('TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFilePath')]"
-					},
-					"TRigger_EVT_Hub_CopyData_properties_typeProperties_scope": {
-						"value": "[parameters('TRigger_EVT_Hub_CopyData_properties_typeProperties_scope')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'LabDataFactory2022_ArmTemplate_1')]"
-			]
 		}
 	]
 }
