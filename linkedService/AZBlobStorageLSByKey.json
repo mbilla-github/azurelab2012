@@ -1,0 +1,17 @@
+{
+	"name": "AZBlobStorageLSByKey",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AKVLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "skey-appblobstorage2022"
+			}
+		}
+	}
+}
