@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "LabDataFactory2022"
+		},
+		"SrcAzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabaseLS_connectionString": {
+			"value": ""
+		},
+		"SrcAzureBlobStorage_connectionString": {
+			"value": ""
+		},
+		"SrcAzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://appdatalake4synapse.dfs.core.windows.net"
+		},
+		"EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFileName": {
+			"value": "@triggerBody().fileName"
+		},
+		"EventTriggerSalesDaily-hourly_properties_PLSalesFiletoTable_parameters_csvFilePath": {
+			"value": "@triggerBody().folderPath"
+		},
+		"EventTriggerSalesDaily-hourly_properties_typeProperties_scope": {
+			"value": "/subscriptions/bad72352-6845-474e-8e98-e44d28654ecc/resourceGroups/dev-resgroup/providers/Microsoft.Storage/storageAccounts/appdatalake4synapse"
+		},
+		"TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFileName": {
+			"value": "@triggerBody().fileName"
+		},
+		"TRigger_EVT_Hub_CopyData_properties_PLEvtTrgCSVtoCSV_parameters_CSVFilePath": {
+			"value": "@triggerBody().folderPath"
+		},
+		"TRigger_EVT_Hub_CopyData_properties_typeProperties_scope": {
+			"value": "/subscriptions/bad72352-6845-474e-8e98-e44d28654ecc/resourceGroups/dev-resgroup/providers/Microsoft.Storage/storageAccounts/appdatalake4synapse"
+		}
+	}
+}
