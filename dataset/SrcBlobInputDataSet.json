@@ -5,11 +5,6 @@
 			"referenceName": "AZBlobStorageLSByKey",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"TarFileName": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
