@@ -7,6 +7,12 @@
 		},
 		"AzureBlobStorageLinkSrvc_connectionString": {
 			"value": ""
+		},
+		"AKVLinkedService_properties_typeProperties_baseUrl": {
+			"value": "https://KV-Dev-AzureLab.vault.azure.net/"
+		},
+		"AZBlobStorageLSByKey_properties_typeProperties_connectionString_secretName": {
+			"value": "skey-appblobstorage2022"
 		}
 	}
 }
