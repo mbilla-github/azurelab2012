@@ -17,6 +17,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "SourceDeptData"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTableCountry",
+						"type": "DatasetReference"
+					},
+					"name": "CountrySrc"
 				}
 			],
 			"sinks": [
@@ -29,6 +36,9 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
+				},
+				{
+					"name": "CacheCountry"
 				}
 			],
 			"transformations": [
@@ -57,6 +67,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> SourceDeptData",
+				"source(output(",
+				"          country_code as string,",
+				"          country_name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CountrySrc",
 				"SourceDeptData keyGenerate(output(dept_id as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
@@ -91,11 +109,24 @@
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          DEPARTMENT_ID,",
-				"          DEPARTMENT_NAME,",
+				"          DEPARTMENT_NAME = country_name,",
 				"          MANAGER_ID,",
-				"          LOCATION_ID,",
+				"          LOCATION_ID = country_name,",
 				"          dept_id",
-				"     )) ~> sink1"
+				"     )) ~> sink1",
+				"CountrySrc sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     keys:['country_code'],",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1,",
+				"     mapColumn(",
+				"          country_code,",
+				"          country_name",
+				"     )) ~> CacheCountry"
 			]
 		}
 	}
