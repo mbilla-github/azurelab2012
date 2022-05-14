@@ -40,13 +40,19 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "EmpMaxSalary",
+					"value": {
+						"value": "@string(activity('DFMaxSalEmp').output.runStatus.output.SinkMaxSal.value[0])",
+						"type": "Expression"
+					}
+				}
 			}
 		],
-		"parameters": {
-			"EmpSalMax": {
-				"type": "int",
-				"defaultValue": 900
+		"variables": {
+			"EmpMaxSalary": {
+				"type": "String"
 			}
 		},
 		"annotations": []
