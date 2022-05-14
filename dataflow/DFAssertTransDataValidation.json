@@ -75,21 +75,6 @@
 				"     partitionFileNames:['empValidated.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     mapColumn(",
-				"          EMPLOYEE_ID,",
-				"          FIRST_NAME,",
-				"          LAST_NAME,",
-				"          EMAIL,",
-				"          PHONE_NUMBER,",
-				"          HIRE_DATE,",
-				"          JOB_ID,",
-				"          SALARY,",
-				"          COMMISSION_PCT,",
-				"          MANAGER_ID = EmpData@MANAGER_ID,",
-				"          DEPARTMENT_ID = EmpData@DEPARTMENT_ID,",
-				"          DEPARTMENT_NAME,",
-				"          LOCATION_ID",
-				"     ),",
 				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
