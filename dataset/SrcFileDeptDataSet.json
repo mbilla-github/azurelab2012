@@ -1,5 +1,5 @@
 {
-	"name": "TargetOutputDataSet",
+	"name": "SrcFileDeptDataSet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AZBlobStorageLSByKey",
@@ -10,13 +10,30 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "output"
+				"container": "dept"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "DEPARTMENT_ID",
+				"type": "String"
+			},
+			{
+				"name": "DEPARTMENT_NAME",
+				"type": "String"
+			},
+			{
+				"name": "MANAGER_ID",
+				"type": "String"
+			},
+			{
+				"name": "LOCATION_ID",
+				"type": "String"
+			}
+		]
 	}
 }

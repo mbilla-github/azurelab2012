@@ -1,0 +1,19 @@
+{
+	"name": "PLCacheExample",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": []
+			}
+		],
+		"parameters": {
+			"MaxSalary": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}

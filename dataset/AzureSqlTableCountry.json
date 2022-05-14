@@ -1,0 +1,25 @@
+{
+	"name": "AzureSqlTableCountry",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "country_code",
+				"type": "varchar"
+			},
+			{
+				"name": "country_name",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "country"
+		}
+	}
+}

@@ -1,0 +1,43 @@
+{
+	"name": "SrcEmpJsonDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZBlobStorageLSByKey",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp.json",
+				"container": "emp"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"skills": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"contact": {
+					"type": "object",
+					"properties": {
+						"mobile": {
+							"type": "string"
+						},
+						"landline": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}

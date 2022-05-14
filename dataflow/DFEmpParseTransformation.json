@@ -1,0 +1,72 @@
+{
+	"name": "DFEmpParseTransformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTableEmpDtl",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDetailsTable"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TargetOutputDataSet",
+						"type": "DatasetReference"
+					},
+					"name": "sinkOut"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EmpParseDataCSV"
+				},
+				{
+					"name": "parseCountry"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          empid as integer,",
+				"          empname as string,",
+				"          skills as string,",
+				"          address as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> EmpDetailsTable",
+				"EmpDetailsTable parse(parseskills = skills ? (skill1 as string,",
+				"          skill2 as string,",
+				"          skill3 as string),",
+				"     format: 'delimited',",
+				"     columnNamesAsHeader: false,",
+				"     columnDelimiter: '|',",
+				"     nullValue: '') ~> EmpParseDataCSV",
+				"EmpParseDataCSV parse(parseAddress = address ? (city as string,",
+				"          country as string),",
+				"     format: 'json',",
+				"     documentForm: 'singleDocument') ~> parseCountry",
+				"parseCountry sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['empParsedtl.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          empid,",
+				"          empname,",
+				"          skill1 = parseskills.skill1,",
+				"          skill2 = parseskills.skill2,",
+				"          skill3 = parseskills.skill3,",
+				"          city = parseAddress.city,",
+				"          country = parseAddress.country",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sinkOut"
+			]
+		}
+	}
+}
